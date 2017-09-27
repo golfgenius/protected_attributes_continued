@@ -54,7 +54,7 @@ module ActiveRecord
 
       def assign_nested_attributes_for_one_to_one_association(association_name, attributes, assignment_opts = {})
         options = self.nested_attributes_options[association_name]
-        attributes = attributes.with_indifferent_access
+        attributes = attributes.to_unsafe_h
 
         if  (options[:update_only] || !attributes['id'].blank?) && (record = send(association_name)) &&
             (options[:update_only] || record.id.to_s == attributes['id'].to_s)
@@ -116,7 +116,7 @@ module ActiveRecord
         end
 
         attributes_collection.each do |attributes|
-          attributes = attributes.with_indifferent_access
+          attributes = attributes.to_unsafe_h
 
           if attributes['id'].blank?
             unless reject_new_record?(association_name, attributes)
