@@ -118,7 +118,7 @@ module ActiveRecord
         end
 
         attributes_collection.each do |attributes|
-          if !attributes.is_a?(ActiveSupport::HashWithIndifferentAccess)
+          if !attributes.is_a?(ActiveSupport::HashWithIndifferentAccess) && !attributes.is_a?(Hash)
             attributes = attributes.to_unsafe_h
           end
 
