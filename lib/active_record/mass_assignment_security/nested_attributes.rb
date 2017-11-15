@@ -54,7 +54,7 @@ module ActiveRecord
 
       def assign_nested_attributes_for_one_to_one_association(association_name, attributes, assignment_opts = {})
         options = self.nested_attributes_options[association_name]
-        if !attributes.is_a?(ActiveSupport::HashWithIndifferentAccess)
+        if !attributes.is_a?(ActiveSupport::HashWithIndifferentAccess) && !attributes.is_a?(Hash)
           attributes = attributes.to_unsafe_h
         end
 
